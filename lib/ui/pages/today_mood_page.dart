@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mood_journal/models/mood.dart';
+import 'package:mood_journal/models/mood_number.dart';
 import 'package:mood_journal/resources/strings.dart';
 import 'package:mood_journal/ui/views/mood_picture.dart';
 class TodayMoodPage extends StatelessWidget {

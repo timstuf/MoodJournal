@@ -4,5 +4,5 @@ class Strings {
   static const appName = "Mood journal";
   static const okButtonText = "OK";
   static const todayMoodPageTitle = "Mood today";
-  static const homePageTitle = "Home page";
+  static const homePageTitle = "Welcome back";
 }
