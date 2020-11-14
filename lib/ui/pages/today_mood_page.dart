@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mood_journal/models/mood_number.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:mood_journal/models/mood.dart';
 import 'package:mood_journal/resources/strings.dart';
 import 'package:mood_journal/ui/views/mood_picture.dart';
 class TodayMoodPage extends StatelessWidget {
@@ -15,7 +16,11 @@ class TodayMoodPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: _buildBackButton(context),
-        title: Text(Strings.todayMoodPageTitle),
+        title: Text(
+          Strings.todayMoodPageTitle,
+          style: GoogleFonts.raleway(color: Colors.black),
+        ),
+        backgroundColor: mood.moodNumber.color,
       ),
       body: Center(
         child: _buildPageContent(),
@@ -45,15 +50,13 @@ class TodayMoodPage extends StatelessWidget {
 
   Widget _buildContactPicture() {
     return Center(
-      child: MaterialButton(
-        onPressed: () {},
-        color: Colors.blue,
-        textColor: Colors.white,
-        child:
-          Text(mood.name),
-        padding: EdgeInsets.all(16),
-        shape: CircleBorder(),
-      )
+      child: Hero(
+        tag: mood.uniqueTag,
+        child: MoodPicture(
+          assetPath: mood.assetPath,
+          size: 200.0,
+        ),
+      ),
     );
   }
 

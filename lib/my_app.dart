@@ -1,8 +1,6 @@
-
 import 'package:flutter/material.dart';
 import 'package:mood_journal/resources/strings.dart';
 import 'package:mood_journal/ui/pages/home_page.dart';
-
 
 class MyApp extends StatelessWidget {
   @override
@@ -10,7 +8,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: Strings.appName,
       theme: ThemeData(
-        primarySwatch: Colors.red,
+        primaryColor: Color(0xFF97C8EB),
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: HomePage(),

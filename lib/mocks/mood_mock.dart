@@ -1,38 +1,26 @@
-import 'package:flutter/material.dart';
-import 'package:mood_journal/models/mood_number.dart';
+import 'package:mood_journal/models/mood.dart';
+import 'package:mood_journal/resources/app_image_assets.dart';
 
 class MoodMock {
   MoodMock._();
 
-  static const Mood defaultMood = Mood(
+  static Mood defaultMood = Mood(
     name: "Unknown",
-    color: Color(0xFF1446A0),
+    assetPath: "Color(0xFF1446A0)",
   );
 
-  static const List<Mood> moods = [
+  static List<Mood> moods = [
     Mood(
-      name: "1",
-      color:Color(0xFF1446A0),
+      name: "angry",
+      assetPath: AppImageAssets.angry,
     ),
     Mood(
-      name: "2",
-      color: Color(0xFF90C2E7),
-
+      name: "happy",
+      assetPath: AppImageAssets.happy,
     ),
     Mood(
-      name: "3",
-      color: Color(0xFFF5D547),
-
-    ),
-    Mood(
-      name: "4",
-      color: Color(0xFFF46036),
-
-    ),
-    Mood(
-      name: "5",
-      color: Color(0xFFA31621),
-
-    ),
+      name: "super",
+      assetPath: AppImageAssets.superMood,
+    )
   ];
 }
