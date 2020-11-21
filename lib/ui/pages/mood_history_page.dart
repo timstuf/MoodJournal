@@ -3,7 +3,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:mood_journal/resources/strings.dart';
 
 class MoodHistoryPage extends StatelessWidget {
-  const MoodHistoryPage({
+  MoodHistoryPage({
     Key key,
   }) : super(key: key);
 
@@ -11,12 +11,22 @@ class MoodHistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        leading: _buildBackButton(context),
-        title: Text(
-          Strings.moodHistoryPageTitle,
-          style: GoogleFonts.raleway(color: Colors.black),
-        ),
-      ),
+          leading: _buildBackButton(context),
+          title: Text(
+            Strings.moodHistoryPageTitle,
+            style: GoogleFonts.raleway(color: Colors.black),
+          ),
+          actions: <Widget>[
+            Padding(
+                padding: EdgeInsets.only(right: 20.0),
+                child: GestureDetector(
+                  onTap: () {},
+                  child: Icon(
+                    Icons.calendar_today,
+                    size: 26.0,
+                  ),
+                )),
+          ]),
       body: Align(
         alignment: Alignment.topCenter,
         child: _buildPageContent(context),
