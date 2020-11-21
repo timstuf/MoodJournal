@@ -26,35 +26,43 @@ class _HomePageState extends State<HomePage> {
         ),
         centerTitle: true,
       ),
-      body: Center(
-          child: Column(
-              children: <Widget>[
-        Center(
-          child: Padding(
-            padding: EdgeInsets.only(top: 55),
-            child: Text(
-              "How would you rate this moment?",
-              textAlign: TextAlign.center,
-              style: new TextStyle(
-                fontSize: 30.0,
-                color: Colors.black,
-              ),
+      body:
+          SingleChildScrollView(
+            child: Column(
+              children: [
+                Center(
+                    child: Column(
+                        children: <Widget>[
+                          Center(
+                            child: Padding(
+                              padding: EdgeInsets.only(top: 55),
+                              child: Text(
+                                "How would you rate this moment?",
+                                textAlign: TextAlign.center,
+                                style: new TextStyle(
+                                  fontSize: 30.0,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ),
+                          ),
+                          Align(
+                            alignment: Alignment.topCenter,
+                            child: new ButtonBar(
+                              mainAxisSize: MainAxisSize.min,
+                              children: buildMoodNumbers(),
+                            ),
+                          ),
+                          SingleChildScrollView(
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: buildMoods(),
+                              ))
+                        ])),
+              ],
             ),
-          ),
-        ),
-        Align(
-          alignment: Alignment.topCenter,
-          child: new ButtonBar(
-            mainAxisSize: MainAxisSize.min,
-            children: buildMoodNumbers(),
-          ),
-        ),
-            SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: buildMoods(),
-        ))
-      ])),
+          )
+
     );
   }
 
