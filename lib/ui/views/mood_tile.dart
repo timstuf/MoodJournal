@@ -1,20 +1,23 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mood_journal/models/mood.dart';
+import 'package:mood_journal/api/model/mood_model.dart';
 import 'package:mood_journal/models/mood_number.dart';
 import 'package:mood_journal/ui/pages/today_mood_page.dart';
 import 'package:mood_journal/ui/views/mood_picture.dart';
 
 class MoodTile extends StatelessWidget {
-  final Mood _mood;
+  final MoodModel _mood;
+  final DateTime _date;
   final List<MoodNumber> _moodNumbers;
 
   const MoodTile({
     Key key,
-    @required Mood mood,
+    @required MoodModel mood,
+    @required DateTime date,
     @required List<MoodNumber> moodNumbers,
   })  : _mood = mood,
+        _date = date,
         _moodNumbers = moodNumbers,
         super(key: key);
 
@@ -26,7 +29,11 @@ class MoodTile extends StatelessWidget {
       onTap: () {
         _mood.moodNumber = findPressedNumber();
         Navigator.of(context).push(
-          CupertinoPageRoute(builder: (_) => TodayMoodPage(mood: _mood)),
+          CupertinoPageRoute(
+              builder: (_) => TodayMoodPage(
+                    mood: _mood,
+                    dateTime:_date,
+                  )),
         );
       },
       child: Padding(
@@ -55,8 +62,7 @@ class MoodTile extends StatelessWidget {
     );
   }
 
-  MoodNumber findPressedNumber()
-  {
-   return  _moodNumbers.firstWhere((element) => element.isPressed);
+  MoodNumber findPressedNumber() {
+    return _moodNumbers.firstWhere((element) => element.isPressed);
   }
 }

@@ -2,6 +2,7 @@ class AppConstants {
   AppConstants._();
 
 
-  static const baseUrl = "http://0.0.0.0:8080";
-  static const userUrl = "/user";
+  static const baseUrl = "http://192.168.100.99:8080";
+  static const moodPictureUrl = "/moodPicture";
+  static const userMoodUrl = "/userMood";
 }

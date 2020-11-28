@@ -1,13 +1,13 @@
-import 'package:flutter/foundation.dart';
+
 class UserModel {
   int id;
   String name;
   String password;
 
   UserModel({
-    @required this.id,
-    @required this.name,
-    @required this.password,
+    this.id,
+    this.name,
+    this.password,
   });
 
   UserModel.fromJson(Map<String, dynamic> json) {

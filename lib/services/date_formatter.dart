@@ -22,4 +22,10 @@ class DateFormatter {
   static String timeFormatter(TimeOfDay time) {
     return time.hour.toString() + ":" + time.minute.toString();
   }
+
+  static DateTime date(DateTime date, TimeOfDay time) {
+    DateTime result =
+        date.add(new Duration(hours: time.hour, minutes: time.minute));
+    return result;
+  }
 }

@@ -1,28 +1,28 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user_service.dart';
+part of 'user_mood_service.dart';
 
 // **************************************************************************
 // ChopperGenerator
 // **************************************************************************
 
-class _$UserService extends UserService {
-  _$UserService([ChopperClient client]) {
+class _$UserMoodService extends UserMoodService {
+  _$UserMoodService([ChopperClient client]) {
     if (client == null) return;
     this.client = client;
   }
 
-  final definitionType = UserService;
+  final definitionType = UserMoodService;
 
-  Future<Response> getAllUsers() {
-    final $url = '/user';
+  Future<Response> getUserMoods(int id) {
+    final $url = '/userMood';
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
   }
 
-  Future<Response> addUser(Map<String, dynamic> user) {
-    final $url = '/user/add';
-    final $body = user;
+  Future<Response> addUserMood(Map<String, dynamic> userMood) {
+    final $url = '/userMood';
+    final $body = userMood;
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);
   }

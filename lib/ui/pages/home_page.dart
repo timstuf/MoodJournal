@@ -1,11 +1,14 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mood_journal/mocks/mood_mock.dart';
-import 'package:mood_journal/mocks/mood_number_mock.dart';
+import 'package:mood_journal/api/model/mood_model.dart';
+import 'package:mood_journal/bloc/mood_bloc.dart';
+import 'package:mood_journal/bloc/state.dart';
 import 'package:mood_journal/models/mood_number.dart';
 import 'package:mood_journal/resources/strings.dart';
 import 'package:mood_journal/services/date_formatter.dart';
 import 'package:mood_journal/ui/views/mood_tile.dart';
+import 'package:mood_journal/ui/widgets/error.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -13,10 +16,23 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  final _bloc = BlocProvider.getBloc<MoodPageBloc>();
   bool showMoods = false;
-  List<MoodNumber> moodNumbers = MoodNumberMock.moods;
+  List<MoodNumber> moodNumbers = MoodNumber.getAllMoods();
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
+
+  @override
+  void initState() {
+    _bloc.getAllMoods();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _bloc.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -83,14 +99,47 @@ class _HomePageState extends State<HomePage> {
                     children: buildMoodNumbers(),
                   ),
                 ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: buildMoods(),
+                StreamBuilder<AppState<List<MoodModel>>>(
+                  stream: _bloc.stream,
+                  builder: _buildResponse,
                 ),
               ])),
             ],
           ),
         ));
+  }
+
+  Widget _buildMoods(List<MoodModel> moods) {
+    return Column(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: showMoods
+            ? moods
+                .map((mood) => MoodTile(
+                      mood: mood,
+                      moodNumbers: moodNumbers,
+                      date: DateFormatter.date(selectedDate, selectedTime),
+                    ))
+                .toList()
+            : new List<Widget>());
+  }
+
+  Widget _buildResponse(
+    BuildContext context,
+    AsyncSnapshot<AppState<List<MoodModel>>> snapshot,
+  ) {
+    //no data
+    if (!snapshot.hasData) {
+      return Center(
+        child: Text(Strings.noData),
+      );
+    }
+
+    final moods = snapshot.data;
+    if (moods is SuccessState) {
+      return _buildMoods((moods as SuccessState).data);
+    } else {
+      return new BlocError(currentState: moods);
+    }
   }
 
   List<Widget> buildMoodNumbers() {
@@ -107,7 +156,7 @@ class _HomePageState extends State<HomePage> {
           },
           color: mood.color,
           child: Text(
-            mood.name,
+            mood.number.toString(),
             style: new TextStyle(
               fontSize: 20.0,
               color: Colors.black,
@@ -124,17 +173,6 @@ class _HomePageState extends State<HomePage> {
       );
     });
     return listButtons;
-  }
-
-  List<Widget> buildMoods() {
-    return showMoods
-        ? MoodMock.moods
-            .map((mood) => MoodTile(
-                  mood: mood,
-                  moodNumbers: moodNumbers,
-                ))
-            .toList()
-        : new List<Widget>();
   }
 
   _selectDate(BuildContext context) async {

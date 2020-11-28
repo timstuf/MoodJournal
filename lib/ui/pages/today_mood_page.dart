@@ -1,19 +1,26 @@
+import 'package:bloc_pattern/bloc_pattern.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:mood_journal/models/mood.dart';
+import 'package:mood_journal/api/api_error.dart';
+import 'package:mood_journal/api/model/mood_model.dart';
+import 'package:mood_journal/api/model/user_mood_model.dart';
+import 'package:mood_journal/bloc/user_mood_bloc.dart';
 import 'package:mood_journal/resources/strings.dart';
 import 'package:mood_journal/ui/views/check_button.dart';
 import 'package:mood_journal/ui/views/mood_picture.dart';
+import 'package:mood_journal/ui/widgets/error_dialog.dart';
 
 import 'mood_history_page.dart';
 
 class TodayMoodPage extends StatelessWidget {
-  final Mood mood;
+  final MoodModel mood;
+  final DateTime dateTime;
 
   const TodayMoodPage({
     Key key,
     @required this.mood,
+    @required this.dateTime,
   }) : super(key: key);
 
   @override
@@ -46,17 +53,17 @@ class TodayMoodPage extends StatelessWidget {
   Widget _buildPageContent(BuildContext context) {
     return SingleChildScrollView(
         child: Column(
-      children: [
-        SizedBox(height: 40.0),
-        _buildContactPicture(),
-        SizedBox(height: 3.0),
-        _buildFullName(),
-        SizedBox(height: 30.0),
-        _buildTextArea(context),
-        SizedBox(height: 60.0),
-        _buildNextButton(context)
-      ],
-    ));
+          children: [
+            SizedBox(height: 40.0),
+            _buildContactPicture(),
+            SizedBox(height: 3.0),
+            _buildFullName(),
+            SizedBox(height: 30.0),
+            _buildTextArea(context),
+            SizedBox(height: 60.0),
+            _buildNextButton(context)
+          ],
+        ));
   }
 
   Widget _buildContactPicture() {
@@ -88,9 +95,25 @@ class TodayMoodPage extends StatelessWidget {
 
   Widget _buildNextButton(BuildContext context) {
     return MaterialButton(
-      onPressed: () => {
-        Navigator.of(context)
-            .push(CupertinoPageRoute(builder: (_) => MoodHistoryPage()))
+        onPressed: ()async{Navigator.of(context)
+            .push(CupertinoPageRoute(builder: (_) => MoodHistoryPage()));
+        UserMoodModel userMoodModel = new UserMoodModel(moodNumber: mood.moodNumber, userId: 1, moodModel: mood, dateTime: dateTime, description: "");
+        try {
+          await BlocProvider.getBloc<UserMoodPageBloc>()
+              .apiClient
+              .saveUserMood(userMoodModel);
+        } on ApiError catch (ex)
+        {
+          showDialog(
+              barrierDismissible: false,
+              context: context,
+              builder: (BuildContext context) {
+                return ErrorDialog(
+                    message: "Error. status code: " +
+                        ex.statusCode.toString())
+                    .build(context);
+              });
+        }
       },
       color: mood.moodNumber.color,
       child: Text(
