@@ -7,7 +7,7 @@ import 'package:mood_journal/api/model/mood_model.dart';
 import 'package:mood_journal/api/model/user_mood_model.dart';
 import 'package:mood_journal/bloc/user_mood_bloc.dart';
 import 'package:mood_journal/resources/strings.dart';
-import 'package:mood_journal/ui/views/check_button.dart';
+import 'package:mood_journal/ui/views/text_area_view.dart';
 import 'package:mood_journal/ui/views/mood_picture.dart';
 import 'package:mood_journal/ui/widgets/error_dialog.dart';
 
@@ -90,13 +90,13 @@ class TodayMoodPage extends StatelessWidget {
 
   Widget _buildTextArea(BuildContext context) {
     return SizedBox(
-        width: 300.0, child: ViewWidget(moodColor: mood.moodNumber.color));
+        width: 300.0, child: TextAreaWidget(moodColor: mood.moodNumber.color));
   }
 
   Widget _buildNextButton(BuildContext context) {
     return MaterialButton(
         onPressed: ()async{Navigator.of(context)
-            .push(CupertinoPageRoute(builder: (_) => MoodHistoryPage()));
+            .push(CupertinoPageRoute(builder: (_) => MoodHistoryPage(userId: 1,)));
         UserMoodModel userMoodModel = new UserMoodModel(moodNumber: mood.moodNumber, userId: 1, moodModel: mood, dateTime: dateTime, description: "");
         try {
           await BlocProvider.getBloc<UserMoodPageBloc>()

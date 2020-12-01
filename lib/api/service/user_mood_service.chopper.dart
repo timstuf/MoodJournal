@@ -15,7 +15,7 @@ class _$UserMoodService extends UserMoodService {
   final definitionType = UserMoodService;
 
   Future<Response> getUserMoods(int id) {
-    final $url = '/userMood';
+    final $url = '/userMood/${id}';
     final $request = Request('GET', $url, client.baseUrl);
     return client.send<dynamic, dynamic>($request);
   }

@@ -7,8 +7,8 @@ part 'user_mood_service.chopper.dart';
 abstract class UserMoodService extends ChopperService {
   static UserMoodService create([ChopperClient client]) => _$UserMoodService(client);
 
-  @Get()
-  Future<Response> getUserMoods(int id);
+  @Get(path: '/{id}')
+  Future<Response> getUserMoods(@Path() int id);
 
   @Post()
   Future<Response> addUserMood(@Body() Map<String, dynamic> userMood);

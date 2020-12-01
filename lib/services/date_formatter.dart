@@ -28,4 +28,8 @@ class DateFormatter {
         date.add(new Duration(hours: time.hour, minutes: time.minute));
     return result;
   }
+
+  static String getTime(DateTime date) {
+    return date.hour.toString() + ":" + date.minute.toString();
+  }
 }

@@ -73,7 +73,7 @@ class ApiClient {
       return response;
     } on ApiError catch (ex) {
       throw ex;
-    } on SocketException {
+    } on SocketException catch (ex){
       throw ApiError(message: Strings.internetConnectionError);
     } catch (ex) {
       throw ApiError(message: Strings.generalErrorMessage);

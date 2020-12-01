@@ -22,10 +22,10 @@ class UserMoodModel{
 
   UserMoodModel.fromJson(Map<String, dynamic> json) {
     id = json['id'];
-    moodNumber = MoodNumber(number: int.parse(json['moodNumber']));
+    moodNumber = MoodNumber(number: json['moodNumber']);
     userId = json['userId'];
     moodModel = MoodModel.fromJson(json['moodPicture']);
-    dateTime = json['dateTime'];
+    dateTime = DateTime.parse(json['dateTime']);
     description = json['description'];
   }
 

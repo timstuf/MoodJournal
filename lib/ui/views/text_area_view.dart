@@ -1,22 +1,22 @@
 import 'package:flutter/material.dart';
 
-class ViewWidget extends StatefulWidget {
+class TextAreaWidget extends StatefulWidget {
   final Color moodColor;
 
-  ViewWidget({
+  TextAreaWidget({
     Key key,
     @required this.moodColor,
   }) : super(key: key);
 
   @override
-  ViewWidgetState createState() => ViewWidgetState(moodColor);
+  TextAreaWidgetState createState() => TextAreaWidgetState(moodColor);
 }
 
-class ViewWidgetState extends State {
+class TextAreaWidgetState extends State {
   bool viewVisible = false;
   final Color moodColor;
 
-  ViewWidgetState(this.moodColor);
+  TextAreaWidgetState(this.moodColor);
 
   void showWidget() {
     setState(() {

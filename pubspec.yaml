@@ -23,6 +23,7 @@ dependencies:
   chopper: 3.0.0
   cupertino_icons: 1.0.0
   reflectable: 2.2.7
+  collection: ^1.14.13
 
 dev_dependencies:
   flutter_test:
