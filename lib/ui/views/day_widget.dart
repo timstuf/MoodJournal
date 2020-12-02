@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:mood_journal/api/model/user_mood_model.dart';
 import 'package:mood_journal/services/date_formatter.dart';
-import 'package:mood_journal/ui/views/mood_picture.dart';
+import 'file:///C:/Users/agris/AndroidStudioProjects/mood_journal/lib/ui/views/itemview/mood_picture.dart';
 
-import 'my_text.dart';
+import 'itemview/my_text.dart';
 
 class DayWidget extends StatelessWidget {
   final DateTime _dateTime;
@@ -24,7 +24,7 @@ class DayWidget extends StatelessWidget {
         SizedBox(height: 10.0),
         SizedBox(
           height: 20.0,
-          child: MyText(text:DateFormatter.dateFormatter(_dateTime)),
+          child: MyText(text:DateFormatter.dateFormatter(_dateTime), size: 20,),
         ),
 
         Container(
@@ -50,7 +50,7 @@ class DayWidget extends StatelessWidget {
             width: 72,
             child: Column(
               children: [
-                MyText(text: DateFormatter.getTime(mood.dateTime)),
+                MyText(text: DateFormatter.getTime(mood.dateTime), size: 14,),
                 MoodPicture(assetPath: mood.moodModel.assetPath)
               ],
             ),

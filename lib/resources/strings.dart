@@ -1,11 +1,17 @@
 class Strings {
   Strings._();
 
-  static const appName = "Mood journal";
+  static const appName = "Mood Journal";
   static const okButtonText = "OK";
   static const todayMoodPageTitle = "Mood today";
   static const moodHistoryPageTitle = "Your moods";
   static const homePageTitle = "Welcome Back";
+  static const signIn = "Sign in";
+  static const signUp = "Sign up";
+  static const userName = "Username";
+  static const password = "Password";
+  static const noAccount = "Don't have an account?";
+  static const alreadyAccount = "Already have an account?";
 
   static const noData = "- No data -";
   static const generalErrorMessage = "Oops... We have an ERROR here :(";

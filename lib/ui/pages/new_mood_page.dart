@@ -10,12 +10,12 @@ import 'package:mood_journal/services/date_formatter.dart';
 import 'package:mood_journal/ui/views/mood_tile.dart';
 import 'package:mood_journal/ui/widgets/error.dart';
 
-class HomePage extends StatefulWidget {
+class NewMoodPage extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _NewMoodPageState createState() => _NewMoodPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _NewMoodPageState extends State<NewMoodPage> {
   final _bloc = BlocProvider.getBloc<MoodPageBloc>();
   bool showMoods = false;
   List<MoodNumber> moodNumbers = MoodNumber.getAllMoods();

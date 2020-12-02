@@ -1,4 +1,5 @@
 import 'package:bloc_pattern/bloc_pattern.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mood_journal/api/model/user_mood_model.dart';
@@ -6,8 +7,9 @@ import 'package:mood_journal/bloc/state.dart';
 import 'package:mood_journal/bloc/user_mood_bloc.dart';
 import 'package:mood_journal/resources/strings.dart';
 import 'package:mood_journal/services/user_mood_group.dart';
+import 'package:mood_journal/ui/pages/new_mood_page.dart';
+import 'package:mood_journal/ui/views/day_widget.dart';
 import 'package:mood_journal/ui/widgets/error.dart';
-import 'package:mood_journal/ui/widgets/itemview/day_widget.dart';
 
 class MoodHistoryPage extends StatelessWidget {
   final int _userId;
@@ -29,6 +31,7 @@ class MoodHistoryPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
+          leading: new Container(),
             title: Text(
               Strings.moodHistoryPageTitle,
               style: GoogleFonts.raleway(color: Colors.black),
@@ -44,6 +47,17 @@ class MoodHistoryPage extends StatelessWidget {
                     ),
                   )),
             ]),
+        floatingActionButton: new FloatingActionButton(
+          child: new Icon(Icons.add),
+          onPressed: () {
+            Navigator.of(context).push(
+              CupertinoPageRoute(
+                  builder: (_) => NewMoodPage(
+
+                  )),
+            );
+          },
+        ),
         body: SingleChildScrollView(
           child: Align(
             alignment: Alignment.topCenter,

@@ -28,4 +28,12 @@ class Utils {
   {
     return moodAssets[name];
   }
+
+  static Color getMainColor(){
+    return Color(int.parse(AppColors.mainColor));
+  }
+
+  static Color getDarkerMainColor(){
+    return Color(int.parse(AppColors.darkerMainColor));
+  }
 }

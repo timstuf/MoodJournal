@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:mood_journal/bloc/mood_bloc.dart';
 import 'package:mood_journal/bloc/user_mood_bloc.dart';
 import 'package:mood_journal/resources/strings.dart';
-import 'package:mood_journal/ui/pages/home_page.dart';
+import 'package:mood_journal/ui/pages/welcome_page.dart';
 
 import 'api/api_client.dart';
 
@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
           primaryColor: Color(0xFF97C8EB),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
-        home: HomePage(),
+        home: WelcomePage(),
       ),
     );
   }

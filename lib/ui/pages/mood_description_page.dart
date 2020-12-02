@@ -7,17 +7,17 @@ import 'package:mood_journal/api/model/mood_model.dart';
 import 'package:mood_journal/api/model/user_mood_model.dart';
 import 'package:mood_journal/bloc/user_mood_bloc.dart';
 import 'package:mood_journal/resources/strings.dart';
-import 'package:mood_journal/ui/views/text_area_view.dart';
-import 'package:mood_journal/ui/views/mood_picture.dart';
+import 'file:///C:/Users/agris/AndroidStudioProjects/mood_journal/lib/ui/views/itemview/text_area_view.dart';
+import 'file:///C:/Users/agris/AndroidStudioProjects/mood_journal/lib/ui/views/itemview/mood_picture.dart';
 import 'package:mood_journal/ui/widgets/error_dialog.dart';
 
 import 'mood_history_page.dart';
 
-class TodayMoodPage extends StatelessWidget {
+class MoodDescriptionPage extends StatelessWidget {
   final MoodModel mood;
   final DateTime dateTime;
 
-  const TodayMoodPage({
+  const MoodDescriptionPage({
     Key key,
     @required this.mood,
     @required this.dateTime,

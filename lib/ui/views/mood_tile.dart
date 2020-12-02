@@ -3,8 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:mood_journal/api/model/mood_model.dart';
 import 'package:mood_journal/models/mood_number.dart';
-import 'package:mood_journal/ui/pages/today_mood_page.dart';
-import 'package:mood_journal/ui/views/mood_picture.dart';
+import 'package:mood_journal/ui/pages/mood_description_page.dart';
+import 'file:///C:/Users/agris/AndroidStudioProjects/mood_journal/lib/ui/views/itemview/mood_picture.dart';
 
 class MoodTile extends StatelessWidget {
   final MoodModel _mood;
@@ -30,7 +30,7 @@ class MoodTile extends StatelessWidget {
         _mood.moodNumber = findPressedNumber();
         Navigator.of(context).push(
           CupertinoPageRoute(
-              builder: (_) => TodayMoodPage(
+              builder: (_) => MoodDescriptionPage(
                     mood: _mood,
                     dateTime:_date,
                   )),
