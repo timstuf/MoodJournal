@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DateFormatter {
   static var dayData =
@@ -20,16 +21,16 @@ class DateFormatter {
   }
 
   static String timeFormatter(TimeOfDay time) {
-    return time.hour.toString() + ":" + time.minute.toString();
+    return getTime(new DateTime(0,0,0,time.hour,time.minute));
   }
 
   static DateTime date(DateTime date, TimeOfDay time) {
-    DateTime result =
-        date.add(new Duration(hours: time.hour, minutes: time.minute));
+    DateTime result = new DateTime(date.year, date.month, date.day)
+        .add(new Duration(hours: time.hour, minutes: time.minute));
     return result;
   }
 
   static String getTime(DateTime date) {
-    return date.hour.toString() + ":" + date.minute.toString();
+    return new DateFormat.Hm().format(date);
   }
 }

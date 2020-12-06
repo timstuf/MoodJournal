@@ -7,6 +7,7 @@ import 'package:mood_journal/resources/strings.dart';
 import 'package:mood_journal/ui/pages/welcome_page.dart';
 
 import 'api/api_client.dart';
+import 'bloc/user_bloc.dart';
 
 class MyApp extends StatelessWidget {
   void _restrictRotation() {
@@ -27,6 +28,10 @@ class MyApp extends StatelessWidget {
         ),
         Bloc(
           (i) => UserMoodPageBloc(apiClient: i.getDependency<ApiClient>()),
+          singleton: false,
+        ),
+        Bloc(
+              (i) => UserPageBloc(apiClient: i.getDependency<ApiClient>()),
           singleton: false,
         ),
       ],

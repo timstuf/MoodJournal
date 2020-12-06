@@ -10,15 +10,18 @@ class MoodTile extends StatelessWidget {
   final MoodModel _mood;
   final DateTime _date;
   final List<MoodNumber> _moodNumbers;
+  final int _userId;
 
   const MoodTile({
     Key key,
     @required MoodModel mood,
     @required DateTime date,
     @required List<MoodNumber> moodNumbers,
+    @required int userId,
   })  : _mood = mood,
         _date = date,
         _moodNumbers = moodNumbers,
+        _userId = userId,
         super(key: key);
 
   @override
@@ -33,6 +36,7 @@ class MoodTile extends StatelessWidget {
               builder: (_) => MoodDescriptionPage(
                     mood: _mood,
                     dateTime:_date,
+                userId: _userId,
                   )),
         );
       },

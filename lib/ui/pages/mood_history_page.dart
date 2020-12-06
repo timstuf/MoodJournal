@@ -52,9 +52,7 @@ class MoodHistoryPage extends StatelessWidget {
           onPressed: () {
             Navigator.of(context).push(
               CupertinoPageRoute(
-                  builder: (_) => NewMoodPage(
-
-                  )),
+                  builder: (_) => NewMoodPage(_userId)),
             );
           },
         ),

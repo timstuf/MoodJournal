@@ -8,15 +8,14 @@ import 'package:mood_journal/ui/views/itemview/my_text.dart';
 import 'package:mood_journal/ui/views/itemview/sign_in_up_button.dart';
 
 class LoginPage extends StatefulWidget {
-  LoginPage({Key key, this.title}) : super(key: key);
-
-  final String title;
-
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final _userNameController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   Widget _createAccountLabel() {
     return InkWell(
       onTap: () {
@@ -49,8 +48,16 @@ class _LoginPageState extends State<LoginPage> {
   Widget _emailPasswordWidget() {
     return Column(
       children: <Widget>[
-        EntryField(title:Strings.userName, isPassword: false,),
-        EntryField(title:Strings.password, isPassword: true),
+        EntryField(
+          title: Strings.userName,
+          isPassword: false,
+          controller: _userNameController,
+        ),
+        EntryField(
+          title: Strings.password,
+          isPassword: true,
+          controller: _passwordController,
+        ),
       ],
     );
   }
@@ -64,7 +71,7 @@ class _LoginPageState extends State<LoginPage> {
               size: 22,
             ),
             centerTitle: true),
-        body: Container(
+        body: SingleChildScrollView(
           child: Column(
             children: <Widget>[
               Container(
@@ -79,7 +86,12 @@ class _LoginPageState extends State<LoginPage> {
                       SizedBox(height: 50),
                       _emailPasswordWidget(),
                       SizedBox(height: 20),
-                      SignInUpButton(text: Strings.signIn),
+                      SignInUpButton(
+                        text: Strings.signIn,
+                        isSignIn: true,
+                        userNameController: _userNameController,
+                        passwordController: _passwordController,
+                      ),
                       SizedBox(height: 30),
                       _createAccountLabel(),
                     ],

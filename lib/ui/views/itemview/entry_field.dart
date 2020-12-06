@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'my_text.dart';
 
 class EntryField extends StatelessWidget {
+  final TextEditingController _controller;
   final String _title;
   final bool _isPassword;
 
@@ -10,8 +11,10 @@ class EntryField extends StatelessWidget {
     Key key,
     @required String title,
     @required bool isPassword,
+    @required TextEditingController controller,
   })  : _title = title,
         _isPassword = isPassword,
+        _controller = controller,
         super(key: key);
 
   @override
@@ -27,6 +30,7 @@ class EntryField extends StatelessWidget {
             ),
             TextField(
               obscureText: _isPassword,
+              controller: _controller,
             )
           ],
         ),

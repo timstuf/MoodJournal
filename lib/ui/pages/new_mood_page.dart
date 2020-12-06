@@ -11,16 +11,22 @@ import 'package:mood_journal/ui/views/mood_tile.dart';
 import 'package:mood_journal/ui/widgets/error.dart';
 
 class NewMoodPage extends StatefulWidget {
+  final int _userId;
+
+  const NewMoodPage(this._userId);
   @override
-  _NewMoodPageState createState() => _NewMoodPageState();
+  _NewMoodPageState createState() => _NewMoodPageState(_userId);
 }
 
 class _NewMoodPageState extends State<NewMoodPage> {
+  final int _userId;
   final _bloc = BlocProvider.getBloc<MoodPageBloc>();
   bool showMoods = false;
   List<MoodNumber> moodNumbers = MoodNumber.getAllMoods();
   DateTime selectedDate = DateTime.now();
   TimeOfDay selectedTime = TimeOfDay.now();
+
+  _NewMoodPageState(this._userId);
 
   @override
   void initState() {
@@ -118,6 +124,7 @@ class _NewMoodPageState extends State<NewMoodPage> {
                       mood: mood,
                       moodNumbers: moodNumbers,
                       date: DateFormatter.date(selectedDate, selectedTime),
+                      userId: _userId,
                     ))
                 .toList()
             : new List<Widget>());

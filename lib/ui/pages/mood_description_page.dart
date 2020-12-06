@@ -7,6 +7,7 @@ import 'package:mood_journal/api/model/mood_model.dart';
 import 'package:mood_journal/api/model/user_mood_model.dart';
 import 'package:mood_journal/bloc/user_mood_bloc.dart';
 import 'package:mood_journal/resources/strings.dart';
+import 'package:mood_journal/ui/views/itemview/my_text.dart';
 import 'file:///C:/Users/agris/AndroidStudioProjects/mood_journal/lib/ui/views/itemview/text_area_view.dart';
 import 'file:///C:/Users/agris/AndroidStudioProjects/mood_journal/lib/ui/views/itemview/mood_picture.dart';
 import 'package:mood_journal/ui/widgets/error_dialog.dart';
@@ -15,13 +16,19 @@ import 'mood_history_page.dart';
 
 class MoodDescriptionPage extends StatelessWidget {
   final MoodModel mood;
-  final DateTime dateTime;
+  final DateTime _dateTime;
+  final int _userId;
+  TextEditingController _descriptionController;
 
-  const MoodDescriptionPage({
-    Key key,
-    @required this.mood,
-    @required this.dateTime,
-  }) : super(key: key);
+  MoodDescriptionPage(
+      {Key key,
+      @required this.mood,
+      @required DateTime dateTime,
+      @required int userId})
+      : _userId = userId,
+        _descriptionController = TextEditingController(),
+        _dateTime = dateTime,
+        super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -53,20 +60,20 @@ class MoodDescriptionPage extends StatelessWidget {
   Widget _buildPageContent(BuildContext context) {
     return SingleChildScrollView(
         child: Column(
-          children: [
-            SizedBox(height: 40.0),
-            _buildContactPicture(),
-            SizedBox(height: 3.0),
-            _buildFullName(),
-            SizedBox(height: 30.0),
-            _buildTextArea(context),
-            SizedBox(height: 60.0),
-            _buildNextButton(context)
-          ],
-        ));
+      children: [
+        SizedBox(height: 40.0),
+        _buildMoodPicture(),
+        SizedBox(height: 3.0),
+        _buildMoodName(),
+        SizedBox(height: 30.0),
+        _buildTextArea(context),
+        SizedBox(height: 60.0),
+        _buildNextButton(context)
+      ],
+    ));
   }
 
-  Widget _buildContactPicture() {
+  Widget _buildMoodPicture() {
     return Center(
       child: Hero(
         tag: mood.uniqueTag,
@@ -78,52 +85,62 @@ class MoodDescriptionPage extends StatelessWidget {
     );
   }
 
-  Widget _buildFullName() {
-    return Text(
-      mood.name,
-      style: TextStyle(
-        fontWeight: FontWeight.bold,
-        fontSize: 24.0,
-      ),
+  Widget _buildMoodName() {
+    return MyText(
+      text: mood.name,
+      size: 24,
     );
   }
 
   Widget _buildTextArea(BuildContext context) {
     return SizedBox(
-        width: 300.0, child: TextAreaWidget(moodColor: mood.moodNumber.color));
+        width: 300.0,
+        child: TextAreaWidget(
+          mood.moodNumber.color,
+          _descriptionController,
+        ));
   }
 
   Widget _buildNextButton(BuildContext context) {
     return MaterialButton(
-        onPressed: ()async{Navigator.of(context)
-            .push(CupertinoPageRoute(builder: (_) => MoodHistoryPage(userId: 1,)));
-        UserMoodModel userMoodModel = new UserMoodModel(moodNumber: mood.moodNumber, userId: 1, moodModel: mood, dateTime: dateTime, description: "");
-        try {
-          await BlocProvider.getBloc<UserMoodPageBloc>()
-              .apiClient
-              .saveUserMood(userMoodModel);
-        } on ApiError catch (ex)
-        {
-          showDialog(
-              barrierDismissible: false,
-              context: context,
-              builder: (BuildContext context) {
-                return ErrorDialog(
-                    message: "Error. status code: " +
-                        ex.statusCode.toString())
-                    .build(context);
-              });
-        }
-      },
-      color: mood.moodNumber.color,
-      child: Text(
-        "Next",
-        style: new TextStyle(
-          fontSize: 20.0,
-          color: Colors.black,
-        ),
-      ),
-      padding: EdgeInsets.all(5),
-    );
+        onPressed: () async {
+          Navigator.of(context).push(CupertinoPageRoute(
+              builder: (_) => MoodHistoryPage(
+                    userId: _userId,
+                  )));
+          UserMoodModel userMoodModel = new UserMoodModel(
+              moodNumber: mood.moodNumber,
+              userId: _userId,
+              moodModel: mood,
+              dateTime: _dateTime,
+              description: _descriptionController.text);
+          try {
+            await BlocProvider.getBloc<UserMoodPageBloc>()
+                .apiClient
+                .saveUserMood(userMoodModel);
+          } on ApiError catch (ex) {
+            showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (BuildContext context) {
+                  return ErrorDialog(message: ex.message.toString())
+                      .build(context);
+                });
+          }
+        },
+        color: mood.moodNumber.color,
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.symmetric(vertical: 15),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+          child: MyText(
+            text: "Next",
+            size: 20,
+            color: Colors.white,
+          ),
+        ));
   }
 }

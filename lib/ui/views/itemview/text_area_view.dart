@@ -2,21 +2,21 @@ import 'package:flutter/material.dart';
 
 class TextAreaWidget extends StatefulWidget {
   final Color moodColor;
+  final TextEditingController descriptionController;
 
-  TextAreaWidget({
-    Key key,
-    @required this.moodColor,
-  }) : super(key: key);
+  TextAreaWidget(this.moodColor, this.descriptionController);
 
   @override
-  TextAreaWidgetState createState() => TextAreaWidgetState(moodColor);
+  TextAreaWidgetState createState() =>
+      TextAreaWidgetState(moodColor, descriptionController);
 }
 
 class TextAreaWidgetState extends State {
   bool viewVisible = false;
   final Color moodColor;
+  final TextEditingController descriptionController;
 
-  TextAreaWidgetState(this.moodColor);
+  TextAreaWidgetState(this.moodColor, this.descriptionController);
 
   void showWidget() {
     setState(() {
@@ -47,6 +47,7 @@ class TextAreaWidgetState extends State {
                 visible: !viewVisible,
                 child: SizedBox(height: 60.0)),
             TextField(
+              controller: descriptionController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Add some details...',
