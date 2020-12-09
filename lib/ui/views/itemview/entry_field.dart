@@ -19,21 +19,21 @@ class EntryField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return Container(
-        margin: EdgeInsets.symmetric(vertical: 10),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            MyText(text: _title, size: 15),
-            SizedBox(
-              height: 10,
-            ),
-            TextField(
-              obscureText: _isPassword,
-              controller: _controller,
-            )
-          ],
-        ),
-      );
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          MyText(text: _title, size: 15),
+          SizedBox(
+            height: 10,
+          ),
+          TextField(
+            obscureText: _isPassword,
+            controller: _controller,
+          )
+        ],
+      ),
+    );
   }
 }

@@ -21,7 +21,9 @@ class ViewMoodDescriptionPage extends StatelessWidget {
   ViewMoodDescriptionPage({Key key, @required UserMoodModel mood})
       : _mood = mood,
         _descriptionController = TextEditingController(),
-        super(key: key);
+        super(key: key) {
+    _descriptionController.text = _mood.description;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -99,39 +101,39 @@ class ViewMoodDescriptionPage extends StatelessWidget {
 
   Widget _buildNextButton(BuildContext context) {
     return MaterialButton(
-      onPressed: () async {
-        Navigator.of(context).push(CupertinoPageRoute(
-            builder: (_) => MoodHistoryPage(
-                  userId: _mood.userId,
-                )));
-        UserMoodModel userMoodModel = new UserMoodModel(
-            moodNumber: _mood.moodNumber,
-            userId: _mood.userId,
-            moodModel: _mood.moodModel,
-            dateTime: _mood.dateTime,
-            description: _descriptionController.text);
-        try {
-          await BlocProvider.getBloc<UserMoodPageBloc>()
-              .apiClient
-              .saveUserMood(userMoodModel);
-        } on ApiError catch (ex) {
-          showDialog(
-              barrierDismissible: false,
-              context: context,
-              builder: (BuildContext context) {
-                return ErrorDialog(
-                        message:
-                            "Error. status code: " + ex.statusCode.toString())
-                    .build(context);
-              });
-        }
-      },
-      color: _mood.moodNumber.color,
-      child: MyText(
-        text: "Next",
-        size: 20.0,
-      ),
-      padding: EdgeInsets.all(5),
-    );
+        onPressed: () async {
+          Navigator.of(context).push(CupertinoPageRoute(
+              builder: (_) => MoodHistoryPage(
+                    userId: _mood.userId,
+                  )));
+          _mood.description = _descriptionController.text;
+          try {
+            await BlocProvider.getBloc<UserMoodPageBloc>()
+                .apiClient
+                .editUserMood(_mood);
+          } on ApiError catch (ex) {
+            showDialog(
+                barrierDismissible: false,
+                context: context,
+                builder: (BuildContext context) {
+                  return ErrorDialog(message: ex.message.toString())
+                      .build(context);
+                });
+          }
+        },
+        color: _mood.moodNumber.color,
+        child: Container(
+          width: MediaQuery.of(context).size.width,
+          padding: EdgeInsets.symmetric(vertical: 15),
+          alignment: Alignment.center,
+          decoration: BoxDecoration(
+            borderRadius: BorderRadius.all(Radius.circular(15)),
+          ),
+          child: MyText(
+            text: "Next",
+            size: 20,
+            color: Colors.white,
+          ),
+        ));
   }
 }

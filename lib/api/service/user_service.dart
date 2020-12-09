@@ -12,5 +12,4 @@ abstract class UserService extends ChopperService {
 
   @Post()
   Future<Response> isUser(@Body() Map<String, dynamic> user);
-
 }

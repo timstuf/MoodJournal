@@ -14,6 +14,7 @@ class NewMoodPage extends StatefulWidget {
   final int _userId;
 
   const NewMoodPage(this._userId);
+
   @override
   _NewMoodPageState createState() => _NewMoodPageState(_userId);
 }
@@ -116,18 +117,24 @@ class _NewMoodPageState extends State<NewMoodPage> {
   }
 
   Widget _buildMoods(List<MoodModel> moods) {
-    return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: showMoods
-            ? moods
-                .map((mood) => MoodTile(
-                      mood: mood,
-                      moodNumbers: moodNumbers,
-                      date: DateFormatter.date(selectedDate, selectedTime),
-                      userId: _userId,
-                    ))
-                .toList()
-            : new List<Widget>());
+    return Container(
+        child: GridView.count(
+            shrinkWrap: true,
+            primary: false,
+            childAspectRatio: 50 / 15,
+            padding: const EdgeInsets.all(5),
+            scrollDirection: Axis.vertical,
+            crossAxisCount: 2,
+            children: showMoods
+                ? moods
+                    .map((mood) => MoodTile(
+                          mood: mood,
+                          moodNumbers: moodNumbers,
+                          date: DateFormatter.date(selectedDate, selectedTime),
+                          userId: _userId,
+                        ))
+                    .toList()
+                : new List<Widget>()));
   }
 
   Widget _buildResponse(

@@ -8,7 +8,7 @@ class AppColors {
   static const fifthMoodColor = "0xFFA31621";
 
   static const mainColor = "0xFF97C8EB";
+
   //static const mainColor = "0xFF5bb5d4";
   static const darkerMainColor = "0xFF4386C4";
 }
-

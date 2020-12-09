@@ -35,8 +35,8 @@ class MoodTile extends StatelessWidget {
           CupertinoPageRoute(
               builder: (_) => MoodDescriptionPage(
                     mood: _mood,
-                    dateTime:_date,
-                userId: _userId,
+                    dateTime: _date,
+                    userId: _userId,
                   )),
         );
       },

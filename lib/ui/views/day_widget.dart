@@ -63,13 +63,14 @@ class DayWidget extends StatelessWidget {
                   ],
                 ),
               )),
-      onTap:(){  Navigator.of(context).push(
-        CupertinoPageRoute(
-            builder: (_) => ViewMoodDescriptionPage(
-              mood: mood,
-            )),
-      );});
-
+          onTap: () {
+            Navigator.of(context).push(
+              CupertinoPageRoute(
+                  builder: (_) => ViewMoodDescriptionPage(
+                        mood: mood,
+                      )),
+            );
+          });
     });
     return listButtons;
   }

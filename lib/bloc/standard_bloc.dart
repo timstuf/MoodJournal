@@ -6,13 +6,12 @@ import 'package:mood_journal/api/api_client.dart';
 import 'package:mood_journal/api/api_error.dart';
 import 'package:mood_journal/bloc/state.dart';
 
-
 class StandardPageBloc<S> extends BlocBase {
   final ApiClient apiClient;
 
   StandardPageBloc({
     @required ApiClient apiClient,
-  })  : apiClient = apiClient;
+  }) : apiClient = apiClient;
 
   final baseController = StreamController<AppState<List<S>>>()
     ..add(InitialState());

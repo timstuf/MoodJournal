@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
           singleton: false,
         ),
         Bloc(
-              (i) => UserPageBloc(apiClient: i.getDependency<ApiClient>()),
+          (i) => UserPageBloc(apiClient: i.getDependency<ApiClient>()),
           singleton: false,
         ),
       ],

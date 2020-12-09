@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:mood_journal/models/mood_number.dart';
 import 'package:mood_journal/resources/utils.dart';
 
-class MoodModel{
+class MoodModel {
   int id;
   String name;
   MoodNumber moodNumber;
@@ -11,7 +11,7 @@ class MoodModel{
   bool isPressed;
 
   MoodModel({
-   this.id,
+    this.id,
     @required this.name,
   }) {
     _init();
@@ -30,8 +30,7 @@ class MoodModel{
     return data;
   }
 
-  _init()
-  {
+  _init() {
     this.isPressed = false;
     this.assetPath = Utils.getAssetByName(name);
   }

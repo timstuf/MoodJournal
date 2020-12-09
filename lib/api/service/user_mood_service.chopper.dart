@@ -26,4 +26,11 @@ class _$UserMoodService extends UserMoodService {
     final $request = Request('POST', $url, client.baseUrl, body: $body);
     return client.send<dynamic, dynamic>($request);
   }
+
+  Future<Response> editUserMood(Map<String, dynamic> userMood, int id) {
+    final $url = '/userMood/${id}';
+    final $body = userMood;
+    final $request = Request('PUT', $url, client.baseUrl, body: $body);
+    return client.send<dynamic, dynamic>($request);
+  }
 }

@@ -3,7 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:mood_journal/api/model/mood_model.dart';
 import 'package:mood_journal/models/mood_number.dart';
 
-class UserMoodModel{
+class UserMoodModel {
   int id;
   MoodNumber moodNumber;
   String description;
@@ -39,7 +39,6 @@ class UserMoodModel{
     data['description'] = this.description;
     return data;
   }
-
 
   String get uniqueTag => "$id$hashCode";
 }

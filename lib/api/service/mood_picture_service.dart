@@ -5,7 +5,8 @@ part 'mood_picture_service.chopper.dart';
 
 @ChopperApi(baseUrl: AppConstants.moodPictureUrl)
 abstract class MoodPictureService extends ChopperService {
-  static MoodPictureService create([ChopperClient client]) => _$MoodPictureService(client);
+  static MoodPictureService create([ChopperClient client]) =>
+      _$MoodPictureService(client);
 
   @Get()
   Future<Response> getAllMoodPictures();

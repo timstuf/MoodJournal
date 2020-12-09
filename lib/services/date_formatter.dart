@@ -21,7 +21,7 @@ class DateFormatter {
   }
 
   static String timeFormatter(TimeOfDay time) {
-    return getTime(new DateTime(0,0,0,time.hour,time.minute));
+    return getTime(new DateTime(0, 0, 0, time.hour, time.minute));
   }
 
   static DateTime date(DateTime date, TimeOfDay time) {

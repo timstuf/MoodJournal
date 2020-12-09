@@ -5,7 +5,8 @@ part 'user_mood_service.chopper.dart';
 
 @ChopperApi(baseUrl: AppConstants.userMoodUrl)
 abstract class UserMoodService extends ChopperService {
-  static UserMoodService create([ChopperClient client]) => _$UserMoodService(client);
+  static UserMoodService create([ChopperClient client]) =>
+      _$UserMoodService(client);
 
   @Get(path: '/{id}')
   Future<Response> getUserMoods(@Path() int id);
@@ -13,4 +14,7 @@ abstract class UserMoodService extends ChopperService {
   @Post()
   Future<Response> addUserMood(@Body() Map<String, dynamic> userMood);
 
+  @Put(path: '/{id}')
+  Future<Response> editUserMood(
+      @Body() Map<String, dynamic> userMood, @Path() int id);
 }

@@ -1,4 +1,3 @@
-
 class UserModel {
   int id;
   String name;
@@ -23,5 +22,4 @@ class UserModel {
     data['password'] = this.password;
     return data;
   }
-
 }

@@ -64,28 +64,44 @@ class ApiClient {
     print("POST request for task");
   }
 
-  Future<int> registerUser(UserModel userModel) async {
-    final userResponse =
-        (await _makeCheckedCall(() => userService.registerUser(userModel.toJson()))).body;
-    print(userResponse);
-    int userId = userResponse is int? userResponse : int.tryParse(userResponse);
-    if(userId == null){
-      throw UserError(message: userResponse);
+  Future editUserMood(UserMoodModel moodModel) async {
+    try {
+      await _makeCheckedCall(
+          () => userMoodService.editUserMood(moodModel.toJson(), moodModel.id));
+    } on ApiError catch (_) {
+      rethrow;
+    } on SocketException catch (_) {
+      rethrow;
+    } catch (ex) {
+      rethrow;
     }
-    else{
+    print("POST request for task");
+  }
+
+  Future<int> registerUser(UserModel userModel) async {
+    final userResponse = (await _makeCheckedCall(
+            () => userService.registerUser(userModel.toJson())))
+        .body;
+    print(userResponse);
+    int userId =
+        userResponse is int ? userResponse : int.tryParse(userResponse);
+    if (userId == null) {
+      throw UserError(message: userResponse);
+    } else {
       return userId;
     }
   }
 
   Future<int> isUser(UserModel userModel) async {
     final userResponse =
-        (await _makeCheckedCall(() => userService.isUser(userModel.toJson()))).body;
+        (await _makeCheckedCall(() => userService.isUser(userModel.toJson())))
+            .body;
     print(userResponse);
-    int userId = userResponse is int? userResponse : int.tryParse(userResponse);
-    if(userId == null){
+    int userId =
+        userResponse is int ? userResponse : int.tryParse(userResponse);
+    if (userId == null) {
       throw UserError(message: userResponse);
-    }
-    else{
+    } else {
       return userId;
     }
   }
@@ -104,11 +120,10 @@ class ApiClient {
       return response;
     } on ApiError catch (ex) {
       throw ex;
-    } on SocketException catch (ex){
+    } on SocketException catch (ex) {
       throw ApiError(message: Strings.internetConnectionError);
     } catch (ex) {
       throw ApiError(message: Strings.generalErrorMessage);
     }
   }
 }
-

@@ -7,8 +7,13 @@ class Utils {
 
   static Map<String, String> moodAssets = {
     "angry": AppImageAssets.angry,
+    "blah": AppImageAssets.blah,
+    "content": AppImageAssets.content,
     "super": AppImageAssets.superMood,
-    "happy": AppImageAssets.happy
+    "happy": AppImageAssets.happy,
+    "hopeful": AppImageAssets.hopeful,
+    "stressed": AppImageAssets.stressed,
+    "worried": AppImageAssets.worried
   };
 
   static Map<int, String> moodColors = {
@@ -19,21 +24,19 @@ class Utils {
     5: AppColors.fifthMoodColor,
   };
 
-  static Color getMoodColorByNumber(int number)
-  {
+  static Color getMoodColorByNumber(int number) {
     return Color(int.parse(moodColors[number]));
   }
 
-  static String getAssetByName(String name)
-  {
+  static String getAssetByName(String name) {
     return moodAssets[name];
   }
 
-  static Color getMainColor(){
+  static Color getMainColor() {
     return Color(int.parse(AppColors.mainColor));
   }
 
-  static Color getDarkerMainColor(){
+  static Color getDarkerMainColor() {
     return Color(int.parse(AppColors.darkerMainColor));
   }
 }
