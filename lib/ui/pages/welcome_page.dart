@@ -38,7 +38,7 @@ class _WelcomePageState extends State<WelcomePage> {
           child: MyText(
             text: Strings.signIn,
             size: 17,
-            color: Utils.getDarkerMainColor(),
+            color: Color(int.parse("0xFF37000A")),
           )),
     );
   }

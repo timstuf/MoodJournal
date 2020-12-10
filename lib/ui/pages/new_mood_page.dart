@@ -6,7 +6,9 @@ import 'package:mood_journal/bloc/mood_bloc.dart';
 import 'package:mood_journal/bloc/state.dart';
 import 'package:mood_journal/models/mood_number.dart';
 import 'package:mood_journal/resources/strings.dart';
+import 'package:mood_journal/resources/utils.dart';
 import 'package:mood_journal/services/date_formatter.dart';
+import 'package:mood_journal/ui/views/itemview/my_text.dart';
 import 'package:mood_journal/ui/views/mood_tile.dart';
 import 'package:mood_journal/ui/widgets/error.dart';
 
@@ -45,10 +47,10 @@ class _NewMoodPageState extends State<NewMoodPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text(
-            Strings.homePageTitle,
-            style: GoogleFonts.raleway(
-                color: Colors.black, fontWeight: FontWeight.w600),
+          title: MyText(
+            text: Strings.homePageTitle,
+            weight: FontWeight.w600,
+            size: 20,
           ),
           centerTitle: true,
         ),
@@ -60,14 +62,8 @@ class _NewMoodPageState extends State<NewMoodPage> {
                 Center(
                   child: Padding(
                     padding: EdgeInsets.only(top: 55),
-                    child: Text(
-                      "How would you rate this moment?",
-                      textAlign: TextAlign.center,
-                      style: new TextStyle(
-                        fontSize: 30.0,
-                        color: Colors.black,
-                      ),
-                    ),
+                    child: MyText(
+                        text: Strings.howWouldYouRateThisMoment, size: 30),
                   ),
                 ),
                 Center(
@@ -195,6 +191,17 @@ class _NewMoodPageState extends State<NewMoodPage> {
       initialDate: selectedDate, // Refer step 1
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light(primary: Utils.getMainColor()),
+            buttonTheme: ButtonThemeData(
+                textTheme: ButtonTextTheme.primary
+            ),
+          ),
+          child: child,
+        );
+      },
     );
     if (picked != null && picked != selectedDate)
       setState(() {
@@ -205,7 +212,18 @@ class _NewMoodPageState extends State<NewMoodPage> {
   _selectTime(BuildContext context) async {
     final TimeOfDay picked = await showTimePicker(
       context: context,
-      initialTime: selectedTime, // Refer step 1
+      initialTime: selectedTime,
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light(primary: Utils.getMainColor()),
+            buttonTheme: ButtonThemeData(
+                textTheme: ButtonTextTheme.primary
+            ),
+          ),
+          child: child,
+        );
+      },
     );
     if (picked != null && picked != selectedTime)
       setState(() {

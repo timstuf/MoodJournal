@@ -30,12 +30,12 @@ class ViewMoodDescriptionPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         leading: _buildBackButton(context),
-        title: Text(
-          "Mood on " +
+        title: MyText(
+          text: "Mood on " +
               DateFormatter.dateFormatter(_mood.dateTime) +
               " " +
               DateFormatter.getTime(_mood.dateTime),
-          style: GoogleFonts.raleway(color: Colors.black),
+          size: 16,
         ),
         backgroundColor: _mood.moodNumber.color,
       ),

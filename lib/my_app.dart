@@ -4,6 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:mood_journal/bloc/mood_bloc.dart';
 import 'package:mood_journal/bloc/user_mood_bloc.dart';
 import 'package:mood_journal/resources/strings.dart';
+import 'package:mood_journal/resources/utils.dart';
 import 'package:mood_journal/ui/pages/welcome_page.dart';
 
 import 'api/api_client.dart';
@@ -41,7 +42,9 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
         title: Strings.appName,
         theme: ThemeData(
-          primaryColor: Color(0xFF97C8EB),
+          primaryColor: Utils.getMainColor(),
+          accentColor: Color(0xFF37000A),
+          highlightColor:  Color(0xFFB75D69),
           visualDensity: VisualDensity.adaptivePlatformDensity,
         ),
         home: WelcomePage(),

@@ -12,6 +12,9 @@ class Strings {
   static const password = "Password";
   static const noAccount = "Don't have an account?";
   static const alreadyAccount = "Already have an account?";
+  static const error = "Error";
+  static const ok = "OK";
+  static const howWouldYouRateThisMoment = "How would you rate this moment?";
 
   static const noData = "- No data -";
   static const generalErrorMessage = "Oops... We have an ERROR here :(";

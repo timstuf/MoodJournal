@@ -13,6 +13,7 @@ class MyText extends StatelessWidget {
     @required double size,
     Color color,
     FontWeight weight,
+    bool isCenter,
   })  : _text = text,
         _size = size,
         _color = color == null ? Colors.black : color,
@@ -23,6 +24,7 @@ class MyText extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       _text,
+      textAlign: TextAlign.center,
       style: GoogleFonts.raleway(
           color: _color, fontWeight: _weight, fontSize: _size),
     );

@@ -36,6 +36,10 @@ class Utils {
     return Color(int.parse(AppColors.mainColor));
   }
 
+  static Color getAccentColor() {
+    return Color(int.parse(AppColors.accentColor));
+  }
+
   static Color getDarkerMainColor() {
     return Color(int.parse(AppColors.darkerMainColor));
   }

@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:mood_journal/api/model/user_mood_model.dart';
+import 'package:mood_journal/resources/utils.dart';
 import 'package:mood_journal/services/date_formatter.dart';
 import 'package:mood_journal/ui/pages/view_mood_description_page.dart';
 import 'file:///C:/Users/agris/AndroidStudioProjects/mood_journal/lib/ui/views/itemview/mood_picture.dart';
@@ -29,6 +30,7 @@ class DayWidget extends StatelessWidget {
           child: MyText(
             text: DateFormatter.dateFormatter(_dateTime),
             size: 20,
+            color: Utils.getAccentColor(),
           ),
         ),
         Container(
@@ -58,6 +60,7 @@ class DayWidget extends StatelessWidget {
                     MyText(
                       text: DateFormatter.getTime(mood.dateTime),
                       size: 14,
+                      color: Utils.getMoodColorByNumber(mood.moodNumber.number),
                     ),
                     MoodPicture(assetPath: mood.moodModel.assetPath)
                   ],

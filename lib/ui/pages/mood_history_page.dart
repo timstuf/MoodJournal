@@ -6,6 +6,7 @@ import 'package:mood_journal/api/model/user_mood_model.dart';
 import 'package:mood_journal/bloc/state.dart';
 import 'package:mood_journal/bloc/user_mood_bloc.dart';
 import 'package:mood_journal/resources/strings.dart';
+import 'package:mood_journal/resources/utils.dart';
 import 'package:mood_journal/services/date_formatter.dart';
 import 'package:mood_journal/services/user_mood_group.dart';
 import 'package:mood_journal/ui/pages/new_mood_page.dart';
@@ -53,10 +54,7 @@ class _MoodHistoryPageState extends State<MoodHistoryPage> {
     return Scaffold(
       appBar: AppBar(
           leading: new Container(),
-          title: Text(
-            Strings.moodHistoryPageTitle,
-            style: GoogleFonts.raleway(color: Colors.black),
-          ),
+          title: MyText(text: Strings.moodHistoryPageTitle, size: 20),
           actions: <Widget>[
             Padding(
                 padding: EdgeInsets.only(right: 20.0),
@@ -65,11 +63,16 @@ class _MoodHistoryPageState extends State<MoodHistoryPage> {
                   child: Icon(
                     Icons.calendar_today,
                     size: 26.0,
+                    color: Utils.getAccentColor(),
                   ),
                 )),
           ]),
       floatingActionButton: new FloatingActionButton(
-        child: new Icon(Icons.add),
+        child: new Icon(
+          Icons.add,
+          color: Utils.getAccentColor(),
+        ),
+        backgroundColor: Utils.getMainColor(),
         onPressed: () {
           Navigator.of(context).push(
             CupertinoPageRoute(builder: (_) => NewMoodPage(_userId)),
@@ -122,9 +125,19 @@ class _MoodHistoryPageState extends State<MoodHistoryPage> {
   _selectDate(BuildContext context) async {
     final DateTime picked = await showDatePicker(
       context: context,
-      initialDate: DateTime.now(), // Refer step 1
+      initialDate: DateTime.now(),
+      // Refer step 1
       firstDate: DateTime(2000),
       lastDate: DateTime(2025),
+      builder: (BuildContext context, Widget child) {
+        return Theme(
+          data: ThemeData.light().copyWith(
+            colorScheme: ColorScheme.light(primary: Utils.getMainColor()),
+            buttonTheme: ButtonThemeData(textTheme: ButtonTextTheme.primary),
+          ),
+          child: child,
+        );
+      },
     );
     if (picked != null && picked != selectedDate)
       setState(() {

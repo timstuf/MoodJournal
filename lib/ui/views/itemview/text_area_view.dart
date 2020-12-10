@@ -47,11 +47,11 @@ class TextAreaWidgetState extends State {
                 visible: !viewVisible,
                 child: SizedBox(height: 60.0)),
             TextField(
+              autocorrect: true,
               controller: descriptionController,
               decoration: InputDecoration(
                 border: OutlineInputBorder(),
                 labelText: 'Add some details...',
-                fillColor: Colors.red,
               ),
               minLines: 3,
               maxLines: 3,
